@@ -8,6 +8,7 @@
 
 import Foundation
 import AdServices
+import React
 
 // Error domain used for rejection errors
 let RNAAAErrorDomain = "RNAAAErrorDomain"

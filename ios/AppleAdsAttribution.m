@@ -171,7 +171,7 @@ RCT_EXPORT_METHOD(getAttributionData:
             resolve(attributionData);
         } else {
             // Reject with both error messages
-            NSString *combinedErrorMessage = [NSString stringWithFormat:@"Ad services error: %@.", adServicesError != NULL ? adServicesError.localizedDescription : @"no error message";
+            NSString *combinedErrorMessage = [NSString stringWithFormat:@"Ad services error: %@.", adServicesError != NULL ? adServicesError.localizedDescription : @"no error message"];
             
             [AppleAdsAttribution rejectPromiseWithUserInfo:reject
                                                   userInfo:[@{

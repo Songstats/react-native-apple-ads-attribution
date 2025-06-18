@@ -51,5 +51,6 @@
         "preset": "angular"
       }
     }
-  }
+  },
+  "packageManager": "yarn@4.9.2"
 }

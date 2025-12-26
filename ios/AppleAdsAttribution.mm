@@ -189,7 +189,13 @@ RCT_EXPORT_METHOD(getAttributionData:
         if (attributionData != nil) {
             resolve(attributionData);
         } else {
-            [AppleAdsAttribution rejectPromiseWithNSError:reject error:adServicesError];
+            NSString *combinedErrorMessage = [NSString stringWithFormat:@"Ad services error: %@.", adServicesError != NULL ? adServicesError.localizedDescription : @"no error message"];
+            
+            [AppleAdsAttribution rejectPromiseWithUserInfo:reject
+                                                  userInfo:[@{
+                                                    @"code" : @"unknown",
+                                                    @"message" : combinedErrorMessage
+                                                  } mutableCopy]];
         }
     }];
 }

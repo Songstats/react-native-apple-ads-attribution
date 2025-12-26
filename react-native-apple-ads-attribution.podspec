@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.ios.weak_framework = 'AdServices'
   s.source       = { :git => "https://github.com/joel-bitar/react-native-apple-ads-attribution.git", :tag => "#{s.version}" }
 
-  s.source_files = "ios/**/*.{h,m,mm}"
+  s.source_files = "ios/**/*.{h,mm}"
 
   s.dependency "React-Core"
 

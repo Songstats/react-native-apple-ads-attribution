@@ -35,6 +35,11 @@
   "peerDependencies": {
     "react-native": "*"
   },
+  "codegenConfig": {
+    "name": "AppleAdsAttributionSpec",
+    "type": "modules",
+    "jsSrcsDir": "src"
+  },
   "release-it": {
     "git": {
       "commitMessage": "Release ${version}",

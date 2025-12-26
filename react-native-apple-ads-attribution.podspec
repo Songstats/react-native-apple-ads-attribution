@@ -17,4 +17,16 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm}"
 
   s.dependency "React-Core"
+
+  if ENV['RCT_NEW_ARCH_ENABLED'] == '1'
+    s.compiler_flags = ['-DRCT_NEW_ARCH_ENABLED=1']
+    s.pod_target_xcconfig = {
+      "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/RCT-Folly\" \"$(PODS_ROOT)/Headers/Private/React-Codegen\" \"$(PODS_ROOT)/Headers/Public/React-Codegen\"",
+      "CLANG_CXX_LANGUAGE_STANDARD" => "c++17"
+    }
+
+    s.dependency "React-Codegen"
+    s.dependency "RCTTypeSafety"
+    s.dependency "ReactCommon/turbomodule/core"
+  end
 end

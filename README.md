@@ -5,6 +5,7 @@ Fetches apple attribution data via iAd and AdServices APIs
 ## Requirements
 - iAd Framework
 - AdServices Framework
+- React Native TurboModules (New Architecture) compatible
 
 ## Installation
 

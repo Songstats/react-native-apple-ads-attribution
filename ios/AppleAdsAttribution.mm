@@ -1,7 +1,6 @@
 #import "AppleAdsAttribution.h"
 #import <AdServices/AdServices.h>
 #import <React/RCTLog.h>
-#import <iAd/iAd.h>
 
 #ifdef RCT_NEW_ARCH_ENABLED
 using namespace facebook::react;
@@ -177,39 +176,9 @@ API_AVAILABLE(ios(14.3)) {
     }
 }
 
-+ (void)getiAdAttributionDataWithCompletionHandler:(void (^)(NSDictionary * _Nullable data, NSError * _Nullable error))completionHandler
-{
-    if ([AppleAdsAttribution isSimulator]) {
-        NSMutableDictionary *details = [NSMutableDictionary dictionary];
-        [details setValue:@"Error getting iAd data, not available in Simulator" forKey:NSLocalizedDescriptionKey];
-        NSError *error = [NSError errorWithDomain:RNAAAErrorDomain code:100 userInfo:details];
-        completionHandler(nil, error);
-        return;
-    }
-
-    if (@available(iOS 10.0, *)) {
-        Class adClientClass = NSClassFromString(@"ADClient");
-        if (adClientClass && [adClientClass instancesRespondToSelector:@selector(requestAttributionDetailsWithBlock:)]) {
-            [[ADClient sharedClient] requestAttributionDetailsWithBlock:^(NSDictionary * _Nullable attributionDetails, NSError * _Nullable error) {
-                if (attributionDetails != nil) {
-                    completionHandler(attributionDetails, nil);
-                } else if (error != nil) {
-                    completionHandler(nil, error);
-                } else {
-                    completionHandler(nil, [AppleAdsAttribution unknownErrorWithMessage:@"requestAttributionDetailsWithBlock returned without data"]);
-                }
-            }];
-        } else {
-            completionHandler(nil, [AppleAdsAttribution unknownErrorWithMessage:@"ADClient not available"]);
-        }
-    } else {
-        completionHandler(nil, [AppleAdsAttribution unknownErrorWithMessage:@"iAd attribution requires iOS 10 or later"]);
-    }
-}
-
 /**
  * Tries to get attribution data first using the AdServices API.
- * Rejected with error if both fails
+ * Rejected with error if AdServices is unavailable or fails.
  */
 RCT_EXPORT_METHOD(getAttributionData:
                   (RCTPromiseResolveBlock) resolve
@@ -220,19 +189,7 @@ RCT_EXPORT_METHOD(getAttributionData:
         if (attributionData != nil) {
             resolve(attributionData);
         } else {
-            [AppleAdsAttribution getiAdAttributionDataWithCompletionHandler:^(NSDictionary * _Nullable iAdData, NSError * _Nullable iAdError) {
-                if (iAdData != nil) {
-                    resolve(iAdData);
-                } else {
-                    NSString *combinedErrorMessage = [NSString stringWithFormat:@"Ad services error: %@. iAd error: %@.", adServicesError != NULL ? adServicesError.localizedDescription : @"no error message", iAdError != NULL ? iAdError.localizedDescription : @"no error message"];
-                    
-                    [AppleAdsAttribution rejectPromiseWithUserInfo:reject
-                                                          userInfo:[@{
-                                                            @"code" : @"unknown",
-                                                            @"message" : combinedErrorMessage
-                                                          } mutableCopy]];
-                }
-            }];
+            [AppleAdsAttribution rejectPromiseWithNSError:reject error:adServicesError];
         }
     }];
 }
@@ -258,16 +215,6 @@ RCT_EXPORT_METHOD(getAdServicesAttributionToken: (RCTPromiseResolveBlock) resolv
  */
 RCT_EXPORT_METHOD(getAdServicesAttributionData: (RCTPromiseResolveBlock) resolve rejecter: (RCTPromiseRejectBlock) reject) {
     [AppleAdsAttribution getAdServicesAttributionDataWithCompletionHandler:^(NSDictionary * _Nullable attributionData, NSError * _Nullable error) {
-        if (attributionData != nil) {
-            resolve(attributionData);
-        } else {
-            [AppleAdsAttribution rejectPromiseWithNSError:reject error:error];
-        }
-    }];
-}
-
-RCT_EXPORT_METHOD(getiAdAttributionData: (RCTPromiseResolveBlock) resolve rejecter: (RCTPromiseRejectBlock) reject) {
-    [AppleAdsAttribution getiAdAttributionDataWithCompletionHandler:^(NSDictionary * _Nullable attributionData, NSError * _Nullable error) {
         if (attributionData != nil) {
             resolve(attributionData);
         } else {

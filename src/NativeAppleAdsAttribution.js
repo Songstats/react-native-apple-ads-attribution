@@ -5,7 +5,6 @@ import {NativeModules, Platform, TurboModuleRegistry} from 'react-native';
 
 export interface Spec extends TurboModule {
   +getAttributionData: () => Promise<Object>;
-  +getiAdAttributionData: () => Promise<Object>;
   +getAdServicesAttributionToken: () => Promise<string>;
   +getAdServicesAttributionData: () => Promise<Object>;
 }

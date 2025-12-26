@@ -9,13 +9,6 @@ class AppleAdsAttribution {
     return AppleAdsAttributionModule.getAttributionData();
   }
 
-  getiAdAttributionData() {
-    if (Platform.OS !== 'ios') {
-      return null;
-    }
-    return AppleAdsAttributionModule.getiAdAttributionData();
-  }
-
   getAdServicesAttributionToken() {
     if (Platform.OS !== 'ios') {
       return null;

@@ -1,35 +1,26 @@
-
-import { NativeModules, Platform } from 'react-native'
-
-const { AppleAdsAttribution: RNAppleAdsAttribution } = NativeModules;
+import { Platform } from 'react-native';
+import AppleAdsAttributionModule from './src/NativeAppleAdsAttribution';
 
 class AppleAdsAttribution {
   getAttributionData() {
     if (Platform.OS !== 'ios') {
-      return null
+      return null;
     }
-    return RNAppleAdsAttribution.getAttributionData();
-  }
-
-  getiAdAttributionData() {
-    if (Platform.OS !== 'ios') {
-      return null
-    }
-    return RNAppleAdsAttribution.getiAdAttributionData();
+    return AppleAdsAttributionModule.getAttributionData();
   }
 
   getAdServicesAttributionToken() {
     if (Platform.OS !== 'ios') {
-      return null
+      return null;
     }
-    return RNAppleAdsAttribution.getAdServicesAttributionToken();
+    return AppleAdsAttributionModule.getAdServicesAttributionToken();
   }
 
   getAdServicesAttributionData() {
     if (Platform.OS !== 'ios') {
-      return null
+      return null;
     }
-    return RNAppleAdsAttribution.getAdServicesAttributionData();
+    return AppleAdsAttributionModule.getAdServicesAttributionData();
   }
 }
 

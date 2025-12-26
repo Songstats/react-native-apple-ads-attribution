@@ -1,7 +1,7 @@
 {
   "name": "@hexigames/react-native-apple-ads-attribution",
   "version": "1.0.2",
-  "description": "Fetches apple attribution data via iAd and AdServices APIs",
+  "description": "Fetches apple attribution data via the AdServices API",
   "main": "index",
   "scripts": {
     "release": "release-it"
@@ -12,7 +12,6 @@
     "apple",
     "ads",
     "search-ads",
-    "iAd",
     "AdServices",
     "attribution",
     "attributionDetails",
@@ -34,6 +33,11 @@
   },
   "peerDependencies": {
     "react-native": "*"
+  },
+  "codegenConfig": {
+    "name": "AppleAdsAttributionSpec",
+    "type": "modules",
+    "jsSrcsDir": "src"
   },
   "release-it": {
     "git": {

@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1'
     s.compiler_flags = ['-DRCT_NEW_ARCH_ENABLED=1']
     s.pod_target_xcconfig = {
-      "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/RCT-Folly\" \"$(PODS_ROOT)/Headers/Private/React-Codegen\" \"$(PODS_ROOT)/Headers/Public/React-Codegen\"",
+      "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/RCT-Folly\" \"$(PODS_ROOT)/Headers/Private/React-Codegen\" \"$(PODS_ROOT)/Headers/Public/React-Codegen\" \"$(PODS_ROOT)/Headers/Public/AppleAdsAttributionSpec\" \"$(PODS_CONFIGURATION_BUILD_DIR)/React-Codegen/React-Codegen\" \"$(PODS_CONFIGURATION_BUILD_DIR)/AppleAdsAttributionSpec/AppleAdsAttributionSpec\"",
       "CLANG_CXX_LANGUAGE_STANDARD" => "c++17"
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "@hexigames/react-native-apple-ads-attribution",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Fetches apple attribution data via the AdServices API",
   "main": "index",
   "scripts": {

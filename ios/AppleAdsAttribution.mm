@@ -182,7 +182,7 @@ API_AVAILABLE(ios(14.3)) {
  */
 RCT_EXPORT_METHOD(getAttributionData:
                   (RCTPromiseResolveBlock) resolve
-                  rejecter:
+                  reject:
                   (RCTPromiseRejectBlock) reject) {
     
     [AppleAdsAttribution getAdServicesAttributionDataWithCompletionHandler:^(NSDictionary * _Nullable attributionData, NSError * _Nullable adServicesError) {
@@ -204,7 +204,7 @@ RCT_EXPORT_METHOD(getAttributionData:
  * Tries to generate an attribution token that then can be used for calls to Apples AdServices API.
  * Rejected with error if token couldn't be generated.
  */
-RCT_EXPORT_METHOD(getAdServicesAttributionToken: (RCTPromiseResolveBlock) resolve rejecter: (RCTPromiseRejectBlock) reject) {
+RCT_EXPORT_METHOD(getAdServicesAttributionToken: (RCTPromiseResolveBlock) resolve reject: (RCTPromiseRejectBlock) reject) {
     NSError *error = nil;
     NSString* attributionToken = [AppleAdsAttribution getAdServicesAttributionToken:&error];
     
@@ -219,7 +219,7 @@ RCT_EXPORT_METHOD(getAdServicesAttributionToken: (RCTPromiseResolveBlock) resolv
  * Tries to get attribution data from apples AdServices API.
  * Rejected with error if data couldn't be fetched.
  */
-RCT_EXPORT_METHOD(getAdServicesAttributionData: (RCTPromiseResolveBlock) resolve rejecter: (RCTPromiseRejectBlock) reject) {
+RCT_EXPORT_METHOD(getAdServicesAttributionData: (RCTPromiseResolveBlock) resolve reject: (RCTPromiseRejectBlock) reject) {
     [AppleAdsAttribution getAdServicesAttributionDataWithCompletionHandler:^(NSDictionary * _Nullable attributionData, NSError * _Nullable error) {
         if (attributionData != nil) {
             resolve(attributionData);

@@ -1,4 +1,5 @@
 require "json"
+require_relative File.join(__dir__, "..", "..", "react-native", "scripts", "react_native_pods")
 
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
@@ -14,19 +15,17 @@ Pod::Spec.new do |s|
   s.ios.weak_framework = 'AdServices'
   s.source       = { :git => "https://github.com/joel-bitar/react-native-apple-ads-attribution.git", :tag => "#{s.version}" }
 
-  s.source_files = "ios/**/*.{h,mm}"
+  s.source_files = "ios/**/*.{h,m,mm}"
 
   s.dependency "React-Core"
 
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1'
     s.compiler_flags = ['-DRCT_NEW_ARCH_ENABLED=1']
     s.pod_target_xcconfig = {
-      "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/RCT-Folly\" \"$(PODS_ROOT)/Headers/Private/React-Codegen\" \"$(PODS_ROOT)/Headers/Public/React-Codegen\" \"$(PODS_ROOT)/Headers/Public/AppleAdsAttributionSpec\" \"$(PODS_CONFIGURATION_BUILD_DIR)/React-Codegen/React-Codegen\" \"$(PODS_CONFIGURATION_BUILD_DIR)/AppleAdsAttributionSpec/AppleAdsAttributionSpec\"",
       "CLANG_CXX_LANGUAGE_STANDARD" => "c++17"
     }
 
-    s.dependency "React-Codegen"
-    s.dependency "RCTTypeSafety"
-    s.dependency "ReactCommon/turbomodule/core"
+    install_modules_dependencies(s)
+    s.dependency "AppleAdsAttributionSpec"
   end
 end

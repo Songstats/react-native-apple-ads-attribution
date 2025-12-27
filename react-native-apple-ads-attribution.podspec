@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.dependency "React-Core"
 
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1'
-    s.compiler_flags = ['-DRCT_NEW_ARCH_ENABLED=1']
+    s.compiler_flags = "-DRCT_NEW_ARCH_ENABLED=1"
     s.pod_target_xcconfig = {
       "CLANG_CXX_LANGUAGE_STANDARD" => "c++17"
     }

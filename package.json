@@ -1,6 +1,6 @@
 {
   "name": "@hexigames/react-native-apple-ads-attribution",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Fetches apple attribution data via the AdServices API",
   "main": "index",
   "scripts": {
@@ -17,6 +17,11 @@
     "attributionDetails",
     "attributionToken"
   ],
+  "codegenConfig": {
+    "name": "AppleAdsAttributionSpec",
+    "type": "modules",
+    "jsSrcsDir": "src"
+  },
   "repository": "https://github.com/joel-bitar/react-native-apple-ads-attribution",
   "author": "Benjamin Bjorklund (https://github.com/joel-bitar)",
   "license": "MIT",

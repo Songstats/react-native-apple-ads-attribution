@@ -1,7 +1,7 @@
 // @flow
 
-import type {TurboModule} from 'react-native';
-import {TurboModuleRegistry} from 'react-native';
+import type { TurboModule } from 'react-native';
+import { Platform, TurboModuleRegistry } from 'react-native';
 
 export interface Spec extends TurboModule {
   +getAttributionData: () => Promise<Object>;
@@ -9,4 +9,7 @@ export interface Spec extends TurboModule {
   +getAdServicesAttributionData: () => Promise<Object>;
 }
 
-export default TurboModuleRegistry.getEnforcing<Spec>('AppleAdsAttribution');
+// Don’t resolve at module load time, and never on Android.
+export default (Platform.OS === 'ios'
+  ? TurboModuleRegistry.get<Spec>('AppleAdsAttribution')
+  : null);

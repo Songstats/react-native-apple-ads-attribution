@@ -6,6 +6,9 @@ class AppleAdsAttribution {
     if (Platform.OS !== 'ios') {
       return Promise.reject(new Error('AppleAdsAttribution is only available on iOS'));
     }
+    if (!AppleAdsAttributionModule) {
+      return Promise.reject(new Error('AppleAdsAttribution native module is not linked'));
+    }
     return AppleAdsAttributionModule.getAttributionData();
   }
 
@@ -13,12 +16,18 @@ class AppleAdsAttribution {
     if (Platform.OS !== 'ios') {
       return Promise.reject(new Error('AppleAdsAttribution is only available on iOS'));
     }
+    if (!AppleAdsAttributionModule) {
+      return Promise.reject(new Error('AppleAdsAttribution native module is not linked'));
+    }
     return AppleAdsAttributionModule.getAdServicesAttributionToken();
   }
 
   getAdServicesAttributionData() {
     if (Platform.OS !== 'ios') {
       return Promise.reject(new Error('AppleAdsAttribution is only available on iOS'));
+    }
+    if (!AppleAdsAttributionModule) {
+      return Promise.reject(new Error('AppleAdsAttribution native module is not linked'));
     }
     return AppleAdsAttributionModule.getAdServicesAttributionData();
   }
